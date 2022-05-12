@@ -6,13 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./src/css/index.css" />
+
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
     <title>PEP440-Checker</title>
 </head>
 
 <body>
+    <div id="loading"><span>loading...</span></div>
     <div id="pc-comply">
-        <!-- Check if input is valid version, true/false -->
+        <p>Check if your Python version is compliant with PEP440.</p>
+        <input id="version-to-test" type="text" placeholder="1.2.3">
+        <button id="version-test" type="submit" pys-onClick="test_version">test</button>
+        <p id="version-test-result"></p>
     </div>
     <div id="pc-match">
         <!-- Example of versions that matches input version specification -->
@@ -21,6 +29,8 @@
     <div id="pc-compare">
         <!-- Compare input versions, gt/lt -->
     </div>
+
+    <py-script src="/src/python/main.py"></py-script>
 </body>
 
 </html>
