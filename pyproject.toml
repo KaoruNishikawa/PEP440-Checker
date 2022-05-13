@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pep440-checker"
+version = "0.1.0"
+description = "Check if your version specification is valid"
+authors = ["Kaoru Nishikawa <k.nishikawa@a.phys.nagoya-u.ac.jp>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "pep440_checker"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

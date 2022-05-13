@@ -1,0 +1,25 @@
+html {
+    padding: 10px;
+}
+
+#loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #AAA;
+    z-index: 100;
+    padding: 20px;
+}
+
+div>input {
+    border: solid 1px #000;
+    border-radius: 2px;
+}
+
+div>button {
+    border: solid 1px #000;
+    border-radius: 2px;
+    background-color: #DFF;
+}
