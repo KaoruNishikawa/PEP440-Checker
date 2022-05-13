@@ -1,7 +1,11 @@
+import asyncio
+
+
 def _import_dependencies():
     from poetry.core.version import pep440
     from poetry.core.version.exceptions import InvalidVersion
     return pep440, InvalidVersion
+
 
 async def import_dependencies():
     try:
@@ -26,12 +30,13 @@ class PEP440:
 
 
 async def test_version(event):
-    version = Element("version-to-test").element.value
+    version = Element("version-to-test").element.value  # noqa: F821
     is_valid = await PEP440().validate_version(version)
-    pyscript.write(
+    pyscript.write(  # noqa: F821
         "version-test-result",
         f"{version} is" + (" " if is_valid else " not ") + "valid version",
     )
+
 
 async def main():
     _ = await import_dependencies()
@@ -39,6 +44,6 @@ async def main():
     from js import document
     document.getElementById("loading").style.display = "none"
 
-import asyncio
+
 loop = asyncio.get_event_loop()
 _ = loop.run_until_complete(main())
