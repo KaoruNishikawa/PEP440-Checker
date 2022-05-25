@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="./pep440_checker/css/index.css" />
+
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <title>PEP440-Checker</title>
+</head>
+
+<body>
+    <div id="loading"><span>loading...</span></div>
+
+    <div class="field" id="pc-comply">
+        <p>Check if your Python version is compliant with PEP440.</p>
+        <input id="version-to-test" type="text" placeholder="1.2.3">
+        <button id="version-test" type="submit" pys-onClick="test_version">test</button>
+        <p id="version-test-result"></p>
+    </div>
+    <div class="field" id="pc-match">
+        <!-- Example of versions that matches input version specification -->
+        <!-- Check if input version specification matches the input version -->
+        <p>Check if input version constraint allows the specified version.</p>
+        <input id="version-specification" type="text" placeholder="1.2.3">
+        <span>is in range</span>
+        <input id="version-range" type="text" placeholder="^1.1">
+        <button id="version-range-test" type="submit" pys-onClick="test_version_range">test</button>
+        <p id="version-range-result"></p>
+    </div>
+    <div class="field" id="pc-compare">
+        <!-- Compare input versions, gt/lt -->
+    </div>
+
+    <py-script src="./pep440_checker/main.py"></py-script>
+</body>
+
+</html>
