@@ -13,6 +13,10 @@ html {
     padding: 20px;
 }
 
+div.field {
+    margin: 10px;
+}
+
 div>input {
     border: solid 1px #000;
     border-radius: 2px;
@@ -22,4 +26,10 @@ div>button {
     border: solid 1px #000;
     border-radius: 2px;
     background-color: #DFF;
+}
+
+code {
+    background-color: antiquewhite;
+    padding: 2px;
+    border-radius: 2px;
 }
