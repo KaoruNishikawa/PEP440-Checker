@@ -9,9 +9,10 @@ packages = [{include = "pep440_checker"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+poetry = "^1.2.0b1"
 
 [tool.poetry.dev-dependencies]
-black = "^20.8b"
+black = "^22.1b"
 flake8 = "^3.8"
 ipykernel = "^5.3"
 jupyter = "^1.0"
