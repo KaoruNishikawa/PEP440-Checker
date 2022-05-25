@@ -1,42 +1,45 @@
 import asyncio
+from typing import Union
 
+# Pre-loaded objects, reloading them can cause error.
 pyscript = pyscript  # noqa: F821
 Element = Element  # noqa: F821
 
 
-def _import_dependencies():
-    from poetry.core.semver.version import Version
-    from poetry.core.semver.helpers import parse_constraint
-    from poetry.core.version.exceptions import InvalidVersion
-    from poetry.core.semver.exceptions import ParseConstraintError
-    return Version, parse_constraint, InvalidVersion, ParseConstraintError
+def _import_dependencies() -> None:
+    global Version, parse_constraint, InvalidVersion, ParseConstraintError
+    from poetry.core.semver.version import Version as _Version
+    from poetry.core.semver.helpers import parse_constraint as _parse_constraint
+    from poetry.core.version.exceptions import InvalidVersion as _InvalidVersion
+    from poetry.core.semver.exceptions import (
+        ParseConstraintError as _ParseConstraintError,
+    )
+
+    Version = _Version
+    parse_constraint = _parse_constraint
+    InvalidVersion = _InvalidVersion
+    ParseConstraintError = _ParseConstraintError
 
 
-async def import_dependencies():
+async def import_dependencies() -> None:
     try:
-        return _import_dependencies()
+        _import_dependencies()
     except ImportError:
         import micropip
+
         await micropip.install(["poetry==1.2.0b1"])
-        return _import_dependencies()
+        _import_dependencies()
 
 
 class PEP440:
-    def __init__(self):
-        pass
-
-    async def validate_version(self, version):
-        Version, _, InvalidVersion, _ = await import_dependencies()
+    async def validate_version(self, version) -> bool:
         try:
             Version.parse(version)
             return True
         except InvalidVersion:
             return False
 
-    async def is_in(self, version, version_range):
-        (
-            Version, parse_constraint, InvalidVersion, ParseConstraintError
-        ) = await import_dependencies()
+    async def is_in(self, version, version_range) -> Union[str, bool]:
         try:
             version = Version.parse(version)
             version_range = parse_constraint(version_range)
@@ -47,7 +50,7 @@ class PEP440:
             return f"Invalid version range: '{version_range}'"
 
 
-async def test_version(event):
+async def test_version(event) -> None:
     version = Element("version-to-test").element.value  # noqa: F821
     is_valid = await PEP440().validate_version(version)
     pyscript.write(
@@ -58,7 +61,7 @@ async def test_version(event):
     )
 
 
-async def test_version_range(event):
+async def test_version_range(event) -> None:
     version = Element("version-specification").element.value
     version_range = Element("version-range").element.value
     is_in = await PEP440().is_in(version, version_range)
@@ -73,10 +76,11 @@ async def test_version_range(event):
         )
 
 
-async def main():
-    _ = await import_dependencies()
+async def main() -> None:
+    await import_dependencies()
 
     from js import document
+
     document.getElementById("loading").style.display = "none"
 
 
