@@ -45,9 +45,9 @@ class PEP440:
             version_range = parse_constraint(version_range)
             return version_range.allows(version)
         except InvalidVersion:
-            return f"Invalid version: '{version}'"
+            return f"Invalid version: <code>{version}</code>"
         except ParseConstraintError:
-            return f"Invalid version range: '{version_range}'"
+            return f"Invalid version range: <code>{version_range}</code>"
 
 
 async def test_version(event) -> None:
