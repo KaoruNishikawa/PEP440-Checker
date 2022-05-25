@@ -20,12 +20,14 @@ div.field {
 div>input {
     border: solid 1px #000;
     border-radius: 2px;
+    padding: 0 5px;
 }
 
 div>button {
     border: solid 1px #000;
     border-radius: 2px;
     background-color: #DFF;
+    padding: 0 5px;
 }
 
 code {
